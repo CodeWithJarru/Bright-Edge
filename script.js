@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Header Scroll Effect
+    // Header Scroll Effect — warm frosted glass
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             header.style.padding = '0.5rem 0';
-            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.background = 'rgba(250, 248, 245, 0.95)';
+            header.style.boxShadow = '0 4px 20px rgba(232, 96, 48, 0.06)';
         } else {
             header.style.padding = '1rem 0';
-            header.style.background = 'rgba(255, 255, 255, 0.8)';
+            header.style.background = 'rgba(250, 248, 245, 0.85)';
+            header.style.boxShadow = 'none';
         }
     });
 
@@ -36,12 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Apply reveal to sections and cards
-    const revealElements = document.querySelectorAll('.service-card, .section-title, .hero-content, .about-content');
-    revealElements.forEach(el => {
+    // Apply staggered reveal to sections and cards
+    const revealElements = document.querySelectorAll(
+        '.service-card, .section-title, .hero-content, .about-content, .testimonial-card, .contact-card, .hero-visual'
+    );
+    revealElements.forEach((el, index) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+        el.style.transform = 'translateY(40px)';
+        el.style.transition = `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.06}s`;
         revealObserver.observe(el);
     });
 
@@ -68,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Simulate API call
             setTimeout(() => {
-                btn.textContent = 'Message Sent!';
+                btn.textContent = '✓ Message Sent!';
                 btn.style.background = '#22c55e';
                 contactForm.reset();
 
